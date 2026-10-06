@@ -16,6 +16,9 @@ dependencies = [
 [project.scripts]
 createch-pw02-image-composition-engine = "createch_pw02_image_composition_engine:main"
 
+[tool.uv]
+package = false
+
 [build-system]
 requires = ["uv_build>=0.12.10,<0.13.0"]
 build-backend = "uv_build"
