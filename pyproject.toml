@@ -1,0 +1,21 @@
+[project]
+name = "createch-pw02-image-composition-engine"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "Ryan Fihr Hulton", email = "Ryanf.hulton@gmail.com" }
+]
+requires-python = ">=3.14"
+dependencies = [
+    "numpy>=2.5.3",
+    "pillow>=12.3.0",
+    "scipy>=1.18.1",
+]
+
+[project.scripts]
+createch-pw02-image-composition-engine = "createch_pw02_image_composition_engine:main"
+
+[build-system]
+requires = ["uv_build>=0.12.10,<0.13.0"]
+build-backend = "uv_build"
