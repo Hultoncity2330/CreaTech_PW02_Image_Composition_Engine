@@ -1,29 +1,12 @@
-import image_io    
+from pathlib import Path
+
+import numpy as np
+
+import image_io
 from blending_modes import get_blend
+from filters import get_filter
 
-def run_pipeline(self, config, apply_filter=None):
-        """Exécute le pipeline décrit par le JSON (dict déjà chargé)."""
-        layers = config["layers"]
-        if not layers:
-            raise ValueError("Le JSON ne contient aucun calque.")
-
-        result = self._prepare_layer(layers[0], apply_filter)
-        for layer in layers[1:]:
-            image = self._prepare_layer(layer, apply_filter)
-            blend = layer.get("blend", {})
-            mode = blend.get("mode", "normal")
-            opacity = blend.get("opacity", 1.0)
-            result = get_blend(mode)(result, image, opacity)
-        return result
-
-def _prepare_layer(self, layer, apply_filter):
-    """Charge l'image d'un calque puis applique ses filtres dans l'ordre."""
-    image = image_io.load_image(layer["path"])
-    for f in layer.get("filters", []):
-        if apply_filter is None:
-            raise ValueError("Des filtres sont demandés mais aucune fonction de filtre n'est fournie.")
-        image = apply_filter(image, f["name"], **f.get("params", {}))
-    return image
+IMAGES_DIR = Path(__file__).parent / "images"
 
 
 class BlendEngine:
@@ -50,3 +33,25 @@ class BlendEngine:
         for image, mode, opacity in layers:
             result = get_blend(mode)(result, image, opacity)
         return result
+
+    def run_pipeline(self, config):
+        """Exécute le pipeline décrit par le JSON (dict déjà chargé)."""
+        layers = config["layers"]
+        if not layers:
+            raise ValueError("Le JSON ne contient aucun calque.")
+
+        result = self._prepare_layer(layers[0])
+        for layer in layers[1:]:
+            image = self._prepare_layer(layer)
+            mode = layer.get("blend", "normal")
+            opacity = layer.get("opacity", 1.0)
+            result = get_blend(mode)(result, image, opacity)
+        return result
+
+    def _prepare_layer(self, layer):
+        """Charge l'image d'un calque puis applique ses filtres (sur le RGB, l'alpha est conservé)."""
+        image = image_io.load_image(str(IMAGES_DIR / layer["image"]))
+        rgb, alpha = image[..., :3], image[..., 3:]
+        for f in layer.get("filters", []):
+            rgb = get_filter(f["name"], **f.get("params", {})).apply(rgb)
+        return np.concatenate([rgb, alpha], axis=2)
