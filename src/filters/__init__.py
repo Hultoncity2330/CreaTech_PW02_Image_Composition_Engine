@@ -1,33 +1,26 @@
+import importlib
+import pkgutil
+
 from .base import Filter
-from .brightness import Brightness
-from .contrast import Contrast
-from .grayscale import GrayScale
-from .sepia import Sepia
-from .mean_blur import MeanBlur
-from .gaussian_blur import GaussianBlur
 
 
-FILTERS: dict[str, type[Filter]] = {
-    "brightness": Brightness,
-    "contrast": Contrast,
-    "grayscale": GrayScale,
-    "sepia": Sepia,
-    "meanblur": MeanBlur,
-    "gaussianblur": GaussianBlur,
-}
+
+# Importe tous les fichiers du dossier : chaque sous-classe de Filter s'enregistre toute seule.
+for _info in pkgutil.iter_modules(__path__):
+    if _info.name != "base":
+        importlib.import_module(f".{_info.name}", __name__)
+
+FILTERS = Filter.registry
 
 
-def get_filter(name: str, params: dict) -> Filter:
-    """Create a filter from its registered name and parameters."""
+def get_filter(name, **params):
+    """Crée le filtre `name` avec ses paramètres (ceux du constructeur)."""
     try:
-        filter_class = FILTERS[name]
+        cls = FILTERS[name]
     except KeyError:
-        raise ValueError(f"Unknown filter: '{name}'")
+        raise ValueError(f"Filtre inconnu '{name}'. Disponibles : {sorted(FILTERS)}") from None
+    return cls(**params)
 
-    try:
-        return filter_class(**params)
-    except TypeError as error:
-        raise ValueError(
-            f"Invalid parameters for filter '{name}': {params}"
-        ) from error
+
+__all__ = ["Filter", "FILTERS", "get_filter"]
 
