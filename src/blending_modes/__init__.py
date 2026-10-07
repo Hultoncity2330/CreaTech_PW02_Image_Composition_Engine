@@ -1,18 +1,22 @@
-from .base import BaseBlend
-from .normal import NormalBlend
-from .multiply import MultiplyBlend
-from .lighten import LightenBlend
+import importlib
+import pkgutil
 
-BLEND_MODES = {
-    cls.name: cls for cls in (NormalBlend, MultiplyBlend, LightenBlend)
-}
+from .base import BaseBlend
+
+# Importe tous les fichiers du dossier : chaque classe qui hérite de BaseBlend
+# et définit `name` s'enregistre toute seule.
+for _info in pkgutil.iter_modules(__path__):
+    if _info.name != "base":
+        importlib.import_module(f".{_info.name}", __name__)
+
+BLEND_MODES = BaseBlend.registry
 
 
 def get_blend(name):
     try:
         return BLEND_MODES[name]()
     except KeyError:
-        raise ValueError(f"Mode inconnu '{name}'. Disponibles : {list(BLEND_MODES)}")
+        raise ValueError(f"Mode inconnu '{name}'. Disponibles : {sorted(BLEND_MODES)}") from None
 
 
-__all__ = ["BaseBlend", "NormalBlend", "MultiplyBlend", "LightenBlend","BLEND_MODES", "get_blend"]
+__all__ = ["BaseBlend","BLEND_MODES", "get_blend"]
