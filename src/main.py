@@ -26,7 +26,7 @@ def main():
         config_path = Path(args.config)
 
         if not config_path.is_absolute():
-            config_path = BASE_DIR / config_path
+            config_path = SRC_DIR / config_path
 
         config = load_config(str(config_path))
         result = BlendEngine().run_pipeline(config)
