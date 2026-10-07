@@ -1,11 +1,9 @@
 import importlib
 import pkgutil
-
 from .base import Filter
 
 
-
-# Importe tous les fichiers du dossier : chaque sous-classe de Filter s'enregistre toute seule.
+# Imports all files in the folder : each Filter subclass registers itself automatically.
 for _info in pkgutil.iter_modules(__path__):
     if _info.name != "base":
         importlib.import_module(f".{_info.name}", __name__)
