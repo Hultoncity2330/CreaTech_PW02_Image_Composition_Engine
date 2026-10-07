@@ -5,7 +5,9 @@ from .base import Filter
 
 class Blur(Filter):
     """Base class for blur filters using convolution."""
-
+    
+    name = None  # to be defined in subclasses
+    
     def __init__(self, kernel: np.ndarray):
         self.kernel = kernel
 
