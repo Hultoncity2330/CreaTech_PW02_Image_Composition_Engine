@@ -5,7 +5,7 @@ from PIL import Image, UnidentifiedImageError
 def load_image(path: str) -> np.ndarray:
     """Load an image as an RGB NumPy array with values between 0 and 1."""
     try:
-        image = Image.open(path).convert("RGB")
+        image = Image.open(path).convert("RGBA")
     except FileNotFoundError:
         raise FileNotFoundError(f"Image not found: {path}")
     except UnidentifiedImageError:
@@ -27,6 +27,9 @@ def array_to_image(image: np.ndarray) -> Image.Image:
 def save_image(image: np.ndarray, path: str) -> None:
     """Save a NumPy image array to a file."""
     pil_image = array_to_image(image)
+
+    if path.lower().endswith((".jpg", ".jpeg")):
+        pil_image = pil_image.convert("RGB")  # le JPEG ne gère pas la transparence
 
     try:
         pil_image.save(path)
