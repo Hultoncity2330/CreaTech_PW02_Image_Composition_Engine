@@ -1,10 +1,12 @@
 import argparse
 import sys
+from pathlib import Path
 
 import image_io
 from config import load_config
 from engine import BlendEngine
 
+OUTPUT_DIR = Path(__file__).parent / "output"
 
 def parse_args():
     p = argparse.ArgumentParser(description="Pipeline de blending piloté par JSON")
@@ -24,8 +26,10 @@ def main():
         return 1
 
     output = args.output or config.get("output", "output.png")
-    image_io.save_image(result, output)
-    print(f"Image enregistrée : {output}")
+    output_path = OUTPUT_DIR / output   # si 'output' est un chemin absolu, il est conservé tel quel
+    OUTPUT_DIR.mkdir(exist_ok=True)     # crée le dossier s'il n'existe pas
+    image_io.save_image(result, str(output_path))
+    print(f"Image enregistrée : {output_path}")
     return 0
 
 
