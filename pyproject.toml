@@ -1,5 +1,5 @@
 [project]
-name = "createch-pw02-image-composition-engine"
+name = "Createch-PW02-Image-Composition-Engine"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
@@ -12,9 +12,6 @@ dependencies = [
     "pillow>=12.3.0",
     "scipy>=1.18.1",
 ]
-
-[project.scripts]
-createch-pw02-image-composition-engine = "createch_pw02_image_composition_engine:main"
 
 [tool.uv]
 package = false
