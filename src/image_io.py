@@ -3,7 +3,7 @@ from PIL import Image, UnidentifiedImageError
 
 
 def load_image(path: str) -> np.ndarray:
-    """Load an image as an RGB NumPy array with values between 0 and 1."""
+    """Load an image as an RGBA NumPy array with values between 0 and 1."""
     try:
         image = Image.open(path).convert("RGBA")
     except FileNotFoundError:
