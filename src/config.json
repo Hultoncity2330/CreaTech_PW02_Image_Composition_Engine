@@ -9,7 +9,7 @@
         {
           "name": "gaussianblur",
           "params": {
-            "window": 5,
+            "size": 5,
             "sigma": 2.0
           }
         }
@@ -21,7 +21,7 @@
         {
           "name": "gaussianblur",
           "params": {
-            "window": 10,
+            "size": 10,
             "sigma": 4.2
           }
         }
