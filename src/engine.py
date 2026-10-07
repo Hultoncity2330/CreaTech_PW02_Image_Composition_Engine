@@ -12,7 +12,7 @@ IMAGES_DIR = Path(__file__).parent / "images"
 class BlendEngine:
     """Run the complete image composition pipeline."""
 
-    def __init__(self, mode="normal", opacity = 1.0):
+    def __init__(self, mode = "normal", opacity = 1.0):
         self.set_mode(mode)
         self.opacity = opacity
 
