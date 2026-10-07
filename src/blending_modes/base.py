@@ -46,7 +46,7 @@ class BaseBlend(ABC):
         return self._from_float(out, dtype)
 
     @abstractmethod
-    def _blend(self, backdrop, source):
+    def _blend(self, backdrop: np.ndarray, source: np.ndarray) -> np.ndarray:
         """Formule du mode, sur des float dans [0, 1] (RGB uniquement)."""
 
     @staticmethod
