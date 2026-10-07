@@ -12,7 +12,7 @@ FILTERS = Filter.registry
 
 
 def get_filter(name, **params):
-    """Crée le filtre `name` avec ses paramètres (ceux du constructeur)."""
+    """Creates the filter `name` with its parameters."""
     try:
         cls = FILTERS[name]
     except KeyError:

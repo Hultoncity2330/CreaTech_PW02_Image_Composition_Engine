@@ -9,8 +9,7 @@ class Filter(ABC):
     
     def __init_subclass__(cls, **kwargs):
         super().__init_subclass__(**kwargs)
-        # Nom utilisable dans le JSON : attribut `name`, sinon nom de la classe en minuscules.
-        # `name = None` exclut une classe intermédiaire (ex. Blur).
+
         name = cls.__dict__.get("name", cls.__name__.lower())
         if name is None:
             return
@@ -23,3 +22,4 @@ class Filter(ABC):
     def apply(self, image: np.ndarray) -> np.ndarray:
         """Apply the filter to an image and return the filtered image."""
         pass
+
