@@ -16,9 +16,14 @@ def get_filter(name, **params):
     try:
         cls = FILTERS[name]
     except KeyError:
-        raise ValueError(f"Filtre inconnu '{name}'. Disponibles : {sorted(FILTERS)}") from None
-    return cls(**params)
+        raise ValueError(f"Unknown filter '{name}'. Available : {sorted(FILTERS)}") from None
+
+    try:
+        return cls(**params)
+    except TypeError as error:
+        raise ValueError(
+            f"Invalid parameters for filter '{name}': {params}"
+        ) from error
 
 
 __all__ = ["Filter", "FILTERS", "get_filter"]
-
