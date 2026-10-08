@@ -4,24 +4,56 @@
       "image": "0_photo.jpg",
       "filters": [
         {
-          "name": "grayscale"
+            "name": "contrast",
+            "params": {
+              "level": 1.35
+            }
+        },
+        {
+            "name": "gaussianblur",
+            "params": {
+              "size": 10,
+              "sigma": 25
+            }
+        },
+        {
+            "name": "glitch",
+            "params": {
+              "intensity": 0.1,
+              "slices": 10
+            }
+        },
+        {
+            "name": "hue",
+            "params": {
+              "angle": 120
+            }
+        },
+        {
+            "name": "bubble_pop",
+            "params": {
+              "amount": 20,
+              "average_size": 100,
+              "opacity": 0.7
+            }
         },
         {
           "name": "gaussianblur",
           "params": {
             "size": 5,
-            "sigma": 2.0
+            "sigma": 3.5
           }
         }
       ]
     },
+
     {
       "image": "1_pop_bike.png",
       "filters": [
         {
           "name": "gaussianblur",
           "params": {
-            "size": 10,
+            "size": 25,
             "sigma": 4.2
           }
         }
@@ -29,11 +61,19 @@
       "blend": "normal",
       "opacity": 0.32
     },
+
     {
       "image": "2_wall.png",
       "filters": [],
-      "blend": "lighten",
+      "blend": "multiply",
       "opacity": 1.0
+    },
+
+    {
+      "image": "3_shiny_car.png",
+      "filters": [],
+      "blend": "lighten",
+      "opacity": 0.35
     }
   ]
 }
