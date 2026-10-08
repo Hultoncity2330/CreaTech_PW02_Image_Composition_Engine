@@ -29,7 +29,7 @@ def save_image(image: np.ndarray, path: str) -> None:
     pil_image = array_to_image(image)
 
     if path.lower().endswith((".jpg", ".jpeg")):
-        pil_image = pil_image.convert("RGB")  # le JPEG ne gère pas la transparence
+        pil_image = pil_image.convert("RGB")  # JPEG does not support transparency
 
     try:
         pil_image.save(path)
