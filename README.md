@@ -8,6 +8,16 @@ The engine loads the images, applies filters in order, blends the layers, and sa
 
 ---
 
+**Project authors:**
+Ryan HULTON  
+Paul LAMOUR  
+
+**Filter exchange group:**
+Fawzi ELGHAZOUI
+Brune ALIRAND
+
+---
+
 ## Features
 
 The engine supports:
