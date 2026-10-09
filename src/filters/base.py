@@ -14,7 +14,7 @@ class Filter(ABC):
         if name is None:
             return
         if name in Filter.registry:
-            raise ValueError(f"Le filtre '{name}' existe déjà ({Filter.registry[name].__name__}).")
+            raise ValueError(f"The filter '{name}' already exists ({Filter.registry[name].__name__}).")
         Filter.registry[name] = cls
 
     
