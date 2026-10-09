@@ -4,10 +4,7 @@
       "image": "0_photo.jpg",
       "filters": [
         {
-            "name": "contrast",
-            "params": {
-              "level": 1.35
-            }
+            "name": "invert"
         },
         {
             "name": "gaussianblur",

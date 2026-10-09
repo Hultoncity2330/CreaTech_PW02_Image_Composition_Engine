@@ -1,6 +1,7 @@
 import importlib
 import pkgutil
 from .base import Filter
+from .invert import Invert
 
 
 # Imports all files in the folder : each Filter subclass registers itself automatically.
@@ -9,6 +10,9 @@ for _info in pkgutil.iter_modules(__path__):
         importlib.import_module(f".{_info.name}", __name__)
 
 FILTERS = Filter.registry
+
+# External filter received from another group.
+FILTERS["invert"] = Invert
 
 
 def get_filter(name, **params):
