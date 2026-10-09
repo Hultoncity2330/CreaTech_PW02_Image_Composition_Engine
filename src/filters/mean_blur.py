@@ -6,6 +6,8 @@ class MeanBlur(Blur):
     """Apply a mean blur to an image."""
 
     def __init__(self, size: int):
+        """Initialize the mean blur filter."""
+        
         if size <= 0:
             raise ValueError("Mean blur size must be greater than 0.")
         

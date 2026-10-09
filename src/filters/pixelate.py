@@ -8,28 +8,14 @@ class Pixelate(Filter):
     name = "pixelate"
 
     def __init__(self, size: int):
-        """Initialize the pixelation filter.
-
-        Args:
-            size: Size of each square pixel block.
-
-        Raises:
-            ValueError: If size is not strictly positive.
-        """
+        """Initialize the pixelation filter."""
         if size <= 0:
             raise ValueError("Pixelate size must be greater than 0.")
 
         self.size = size
 
     def apply(self, image: np.ndarray) -> np.ndarray:
-        """Apply pixelation to an RGB image.
-
-        Args:
-            image: RGB image as a NumPy array of shape (H, W, 3).
-
-        Returns:
-            A pixelated RGB image.
-        """
+        """Apply pixelation to an RGB image."""
         result = np.array(image, copy=True)
         height, width, _ = image.shape
 

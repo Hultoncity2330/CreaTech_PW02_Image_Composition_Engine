@@ -8,6 +8,7 @@ class Filter(ABC):
     registry = {}
     
     def __init_subclass__(cls, **kwargs):
+        """Automatically register each concrete filter subclass."""
         super().__init_subclass__(**kwargs)
 
         name = cls.__dict__.get("name", cls.__name__.lower())

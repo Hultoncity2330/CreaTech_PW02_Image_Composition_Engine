@@ -11,4 +11,5 @@ class MultiplyBlend(BaseBlend):
     name = "multiply"
 
     def _blend(self, backdrop: np.ndarray, source: np.ndarray) -> np.ndarray:
+        """Apply the multiply blend formula."""
         return backdrop * source

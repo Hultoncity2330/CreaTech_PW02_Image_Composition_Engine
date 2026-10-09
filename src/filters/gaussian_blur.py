@@ -6,6 +6,8 @@ class GaussianBlur(Blur):
     """Apply a Gaussian blur to an image."""
 
     def __init__(self, size: int, sigma: float = 1.0):
+        """Initialize the Gaussian blur filter."""
+        
         if size <= 0:
             raise ValueError("Gaussian blur size must be greater than 0.")
 

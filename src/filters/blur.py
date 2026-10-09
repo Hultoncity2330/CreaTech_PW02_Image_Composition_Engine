@@ -9,6 +9,7 @@ class Blur(Filter):
     name = None  # to be defined in subclasses
     
     def __init__(self, kernel: np.ndarray):
+        """Initialize the blur filter with a convolution kernel."""
         self.kernel = kernel
 
     def apply(self, image: np.ndarray) -> np.ndarray:

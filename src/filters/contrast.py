@@ -6,6 +6,7 @@ class Contrast(Filter):
     """Adjust the contrast of an image."""
 
     def __init__(self, level: float):
+        """Initialize the contrast filter with an adjustment level."""
         self.level = level
 
     def apply(self, image: np.ndarray) -> np.ndarray:

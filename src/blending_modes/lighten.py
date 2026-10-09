@@ -11,4 +11,5 @@ class LightenBlend(BaseBlend):
     name = "lighten"
 
     def _blend(self, backdrop: np.ndarray, source: np.ndarray) -> np.ndarray:
+        """Apply the lighten blend formula."""
         return np.maximum(backdrop, source)
